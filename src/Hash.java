@@ -1,4 +1,3 @@
-import java.util.Arrays;
 
 public class Hash {
 	
@@ -19,9 +18,13 @@ public class Hash {
 		vetor[chave].inserirContato(contato);
 	}
 
-	public void deletar(Contato contato) { 
-		for (int i = 0; i < tamanhoHash; i++) {
-			vetor[i].deletarContato(contato);
+	public void deletar(String nome) { 
+		if(buscarPorNome(nome) != null) {
+			Contato contato = buscarPorNome(nome);
+			int chave = contato.getCodigo() % tamanhoHash;
+			vetor[chave].deletarContato(contato);
+		} else {
+			System.out.println("Impossível deletar, contato não encontrado!");
 		}
 	}
 	
@@ -33,12 +36,11 @@ public class Hash {
 
 	public Contato buscarPorNome(String nome) {		
 		for (int i = 0; i < tamanhoHash; i++) {
-			if (vetor[i].buscarContatoPorNome(nome) != null) {
-				System.out.println(vetor[i].buscarContatoPorNome(nome));
+			if (vetor[i].buscarContatoPorNome(nome) != null) {				
 				return vetor[i].buscarContatoPorNome(nome);
 			};
 		}
-		System.out.println("Contato nï¿½o encontrado");
+		System.out.println("Contato nao encontrado");
 		return null;
 	}
 

@@ -1,3 +1,4 @@
+import java.util.Objects;
 
 public class Contato {
 	
@@ -74,6 +75,20 @@ public class Contato {
 
 	public void setCelular(String celular) {
 		this.celular = celular;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Contato other = (Contato) obj;
+		return Objects.equals(celular, other.celular) && codigo == other.codigo && Objects.equals(email, other.email)
+				&& Objects.equals(nascimento, other.nascimento) && Objects.equals(nome, other.nome)
+				&& Objects.equals(telefone, other.telefone);
 	}
 	
 	
