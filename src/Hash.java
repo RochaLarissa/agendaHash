@@ -43,6 +43,10 @@ public class Hash {
 		System.out.println("Contato nao encontrado");
 		return null;
 	}
+	
+	public void exibirTodos() {
+		System.out.println(this);
+	}
 
 	@Override
 	public String toString() {
@@ -53,7 +57,5 @@ public class Hash {
 		}
 		return out;
 	}
-	
-	
 
 }

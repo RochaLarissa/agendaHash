@@ -24,22 +24,29 @@ public class Lista {
 		No no = inicio;
 		No anterior = new No();
 		No proximo = new No();
-		while (no != null) { 												// PERCORRE A LISTA
-			if (contato.getCodigo() == no.getContato().getCodigo()) { 		// ENCONTRA O CONTATO A DELETAR
-				proximo = no.getProximo(); 									// ENCONTRA O PROXIMO
-
-				No noAnterior = inicio;
-				while (noAnterior != null) { 								// PERCORRE A LISTA NOVAMENTE PARA ENCONTRAR O ANTERIOR
-					if (no.getContato().getCodigo() == noAnterior.getProximo().getContato().getCodigo()) {
-						anterior = noAnterior; 								// ENCONTRA O ANTERIOR
-						break;
-					}
-					noAnterior = noAnterior.getProximo();
-				}
-			} 																// SAI DO LAÇO
-			no = no.getProximo(); 											// SAI DO OUTRO LAÇO
-		}
-		anterior.setProximo(proximo); 										// FAZ A REMOÇÃO DO CONTATO DESEJADO DA LISTA
+		
+		if(tamanho == 1) {														//DELETANDO SE FOR O NO INICIAL
+			inicio = null;
+		} else {																//SE NÃO FOR O NO INICIAL
+			while (no != null) { 												// PERCORRE A LISTA
+				if (contato.getCodigo() == no.getContato().getCodigo()) { 		// ENCONTRA O CONTATO A DELETAR
+					proximo = no.getProximo(); 									// ENCONTRA O PROXIMO
+					
+					No noAnterior = inicio;
+					try {
+						while (noAnterior != null) { 								// PERCORRE A LISTA NOVAMENTE PARA ENCONTRAR O ANTERIOR
+							if (no.getContato().getCodigo() == noAnterior.getProximo().getContato().getCodigo()) {
+								anterior = noAnterior; 								// ENCONTRA O ANTERIOR
+								anterior.setProximo(proximo); 						// FAZ A REMOÇÃO DO CONTATO DESEJADO DA LISTA
+								break;
+							}
+							noAnterior = noAnterior.getProximo();
+						}
+					} catch (Exception e) {}
+				} 																// SAI DO LAÇO
+				no = no.getProximo(); 											// SAI DO OUTRO LAÇO
+			}			
+		}		
 		tamanho--;
 	}
 
@@ -57,7 +64,7 @@ public class Lista {
 	public Contato buscarContatoPorNome(String nome) {
 		No no = inicio;
 		while (no != null) {
-			if (nome.equals(no.getContato().getNome())) {
+			if (nome.equalsIgnoreCase(no.getContato().getNome())) {
 				return no.getContato();
 			}
 			no = no.getProximo();
