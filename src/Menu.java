@@ -5,7 +5,7 @@ public class Menu {
 		
 	}
 	
-	public void menuInicial() {
+	public static void menuInicial() {
 		
 		System.out.println("------------ MENU INICIAL ------------");
 		System.out.println(" 1. Adicionar contato");
